@@ -1,5 +1,7 @@
 #include "numconv.h"
 
+#include <stack>
+
 namespace Converter
 {
   namespace Constants
@@ -8,9 +10,8 @@ namespace Converter
     static const char* Ones[]   = { "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
     static const char* Teens[]  = { "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
     static const char* Tens[]  =  { "", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+    static const char* GroupUnits[] = { "", "thousand", "million", "billion" };
     static const std::string Hundred("hundred");
-    static const std::string Thousand("thousand");
-    static const std::string Million("million");
     static const std::string Space(" ");
     static const std::string And(" and ");
     static const std::string Hyphen("-");
@@ -22,20 +23,63 @@ namespace Converter
   }
 
   UIntToString::UIntToString(const BASE base)
-    : Base(base == BASE_OCTAL ? 8 : 10),
-      BaseTwenty(Base * 2),
-      BaseHundred(Base * Base),
-      BaseThousand(Base * Base * Base),
-      BaseMillion(BaseThousand * BaseThousand),
-      BaseBillion(BaseThousand * BaseMillion)
-  {}
-
-  std::string UIntToString::operator() (unsigned num)
+    : Base(base == BASE_OCTAL ? 8 : 10)
+    , BaseTwenty(Base * 2)
+    , BaseHundred(Base * Base)
+    , BaseThousand(Base * Base * Base)
   {
-    return ConvertGroup(num, false);
   }
 
-  std::string UIntToString::ConvertGroup(const unsigned num, bool skipZero)
+  std::string UIntToString::operator() (const unsigned num) const
+  {
+    return Convert(num, false);
+  }
+
+  bool UIntToString::InRange1To99(const unsigned num) const
+  {
+    return (num > 0) && (num < BaseHundred);
+  }
+
+  unsigned UIntToString::GroupUnit(const unsigned group) const
+  {
+    unsigned groupUnit = BaseThousand;
+    for (unsigned i = 0; i < group - 1; ++i)
+    {
+      groupUnit *= BaseThousand;
+    }
+    return groupUnit;
+  }
+
+  std::string UIntToString::ConvertGroup(const unsigned num, const unsigned group) const
+  {
+    std::stack<unsigned> groups;
+
+    for (unsigned div = num, i = 0; i <= group - 1; ++i)
+    {
+      groups.push(div % BaseThousand);
+      div /= BaseThousand;
+    }
+
+    bool needAnd = false;
+    while (!groups.empty())
+    {
+      if (groups.top())
+      {
+        needAnd = InRange1To99(groups.top());
+        break;
+      }
+      groups.pop();
+    }
+
+    unsigned groupUnit = GroupUnit(group);
+
+    return Concat(
+      Convert(num / groupUnit, true) + Constants::Space + Constants::GroupUnits[group],
+      Convert(num % groupUnit, true),
+      needAnd ? Constants::And : Constants::Space);
+  }
+
+  std::string UIntToString::Convert(const unsigned num, const bool skipZero) const
   {
     if (!num)
     {
@@ -57,25 +101,20 @@ namespace Converter
     {
       return Concat(
         std::string(Constants::Ones[num / BaseHundred]) + Constants::Space + Constants::Hundred,
-        ConvertGroup(num % BaseHundred, true),
+        Convert(num % BaseHundred, true),
         Constants::And);
     }
-    else if (num < BaseMillion)
+    else if (num < BaseThousand * BaseThousand)
     {
-      unsigned remain = num % BaseThousand;
-      return Concat(
-        ConvertGroup(num / BaseThousand, true) + Constants::Space + Constants::Thousand,
-        ConvertGroup(remain, true),
-        remain < BaseHundred ? Constants::And : Constants::Space);
+      return ConvertGroup(num, 1);
     }
-    else if (num < BaseBillion)
+    else if (num < BaseThousand * BaseThousand * BaseThousand)
     {
-      unsigned remain = num % BaseMillion;
-      unsigned nextGroup = remain / BaseThousand;
-      return Concat(
-        ConvertGroup(num / BaseMillion, true) + Constants::Space + Constants::Million,
-        ConvertGroup(remain, true),
-        (nextGroup && (nextGroup < BaseHundred)) ? Constants::And : Constants::Space);
+      return ConvertGroup(num, 2);
+    }
+    else if (num < UINT_MAX)
+    {
+      return ConvertGroup(num, 3);
     }
     else
     {

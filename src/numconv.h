@@ -17,16 +17,17 @@ namespace Converter
   {
   public:
     explicit UIntToString(const BASE base = BASE_DECIMAL);
-    std::string operator() (unsigned num);
+    std::string operator() (const unsigned num) const;
 
   private:
     const unsigned Base;
     const unsigned BaseTwenty;
     const unsigned BaseHundred;
     const unsigned BaseThousand;
-    const unsigned BaseMillion;
-    const unsigned BaseBillion;
-    std::string ConvertGroup(const unsigned num, bool skipZero);
+    bool InRange1To99(const unsigned num) const;
+    unsigned GroupUnit(const unsigned group) const;
+    std::string ConvertGroup(const unsigned num, const unsigned group) const;
+    std::string Convert(const unsigned num, const bool skipZero) const;
   };
 }
 #endif // NUMCONV_H

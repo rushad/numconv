@@ -1,6 +1,8 @@
 #include "numconv.h"
 #include "gtest/gtest.h"
 
+#include <climits>
+
 namespace Converter
 {
   namespace Test
@@ -104,6 +106,23 @@ namespace Converter
       EXPECT_EQ("one hundred and twenty-three million four hundred and fifty-six thousand seven hundred and eighty-nine", conv(123456789));
       EXPECT_EQ("one hundred and three million and six thousand and nine", conv(103006009));
       EXPECT_EQ("twelve million and thirty-four thousand and fifty-six", conv(12034056));
+      EXPECT_EQ("one million one hundred and twenty-three thousand and one", conv(1123001));
+      EXPECT_EQ("one million and twelve", conv(1000012));
+      EXPECT_EQ("one million one hundred", conv(1000100));
+      EXPECT_EQ("one million one hundred and one", conv(1000101));
+    }
+
+    TEST_F(ConvTest, Billions)
+    {
+      UIntToString conv;
+      EXPECT_EQ("one billion", conv(1000000000));
+      EXPECT_EQ("one billion and one", conv(1000000001));
+      EXPECT_EQ("one billion and twelve", conv(1000000012));
+      EXPECT_EQ("one billion one hundred and one", conv(1000000101));
+      EXPECT_EQ("one billion one hundred and twenty-three thousand and one", conv(1000123001));
+      EXPECT_EQ("one billion one hundred and twenty-three million and one", conv(1123000001));
+      EXPECT_EQ("one billion and twenty-three million and one", conv(1023000001));
+      EXPECT_EQ("one billion and twenty-three thousand and one", conv(1000023001));
     }
 
     TEST_F(ConvTest, ThreeDigitOct)
@@ -124,7 +143,7 @@ namespace Converter
       UIntToString conv;
       try
       {
-        conv(1000000000);
+        conv(UINT_MAX);
         FAIL();
       }
       catch(const std::exception&)
