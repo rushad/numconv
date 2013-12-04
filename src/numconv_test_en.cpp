@@ -4,19 +4,20 @@
 #include <ostream>
 #include <climits>
 
+#define LANG_EN "EN"
+#define LANG_RU "RU"
+
 namespace Converter
 {
-
   namespace Test
   {
-  
     class ConvTest : public ::testing::Test
     {
     public:
       ConvTest() 
       {
-        Factory.Add(LANG_ENGLISH, EnglishNumericConverter::createInstance);
-        Factory.Add(LANG_RUSSIAN, RussianNumericConverter::createInstance);
+        Factory.Add(LANG_EN, EnglishNumericConverter::createInstance);
+        Factory.Add(LANG_RU, RussianNumericConverter::createInstance);
       }
       NumericConverterFactory* GetFactory() const
       {
@@ -28,13 +29,13 @@ namespace Converter
 
     TEST_F(ConvTest, ZeroEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ(std::string("zero"), convPtr->ToString(0));
     }
 
     TEST_F(ConvTest, OnesEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("one", convPtr->ToString(1));
       EXPECT_EQ("two", convPtr->ToString(2));
       EXPECT_EQ("three", convPtr->ToString(3));
@@ -48,7 +49,7 @@ namespace Converter
 
     TEST_F(ConvTest, TeensEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("ten", convPtr->ToString(10));
       EXPECT_EQ("eleven", convPtr->ToString(11));
       EXPECT_EQ("twelve", convPtr->ToString(12));
@@ -63,7 +64,7 @@ namespace Converter
 
     TEST_F(ConvTest, TwoDigitEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("twenty", convPtr->ToString(20));
       EXPECT_EQ("thirty-one", convPtr->ToString(31));
       EXPECT_EQ("fourty-two", convPtr->ToString(42));
@@ -76,7 +77,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThreeDigitEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("one hundred", convPtr->ToString(100));
       EXPECT_EQ("one hundred and one", convPtr->ToString(101));
       EXPECT_EQ("two hundred and twelve", convPtr->ToString(212));
@@ -91,7 +92,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThousandsEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("one thousand", convPtr->ToString(1000));
       EXPECT_EQ("one thousand and one", convPtr->ToString(1001));
       EXPECT_EQ("two hundred thousand and one", convPtr->ToString(200001));
@@ -105,7 +106,7 @@ namespace Converter
 
     TEST_F(ConvTest, MillionsEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("one million", convPtr->ToString(1000000));
       EXPECT_EQ("one million and one", convPtr->ToString(1000001));
       EXPECT_EQ("one hundred million", convPtr->ToString(100 * 1000000));
@@ -122,7 +123,7 @@ namespace Converter
 
     TEST_F(ConvTest, BillionsEN10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_DECIMAL));
       EXPECT_EQ("one billion", convPtr->ToString(1000000000));
       EXPECT_EQ("one billion and one", convPtr->ToString(1000000001));
       EXPECT_EQ("one billion and twelve", convPtr->ToString(1000000012));
@@ -135,13 +136,13 @@ namespace Converter
 
     TEST_F(ConvTest, ZeroRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ(std::string("ноль"), convPtr->ToString(0));
     }
 
     TEST_F(ConvTest, OnesRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("один", convPtr->ToString(1));
       EXPECT_EQ("два", convPtr->ToString(2));
       EXPECT_EQ("три", convPtr->ToString(3));
@@ -155,7 +156,7 @@ namespace Converter
 
     TEST_F(ConvTest, TeensRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("десять", convPtr->ToString(10));
       EXPECT_EQ("одиннадцать", convPtr->ToString(11));
       EXPECT_EQ("двенадцать", convPtr->ToString(12));
@@ -170,7 +171,7 @@ namespace Converter
 
     TEST_F(ConvTest, TwoDigitRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("двадцать", convPtr->ToString(20));
       EXPECT_EQ("тридцать один", convPtr->ToString(31));
       EXPECT_EQ("сорок два", convPtr->ToString(42));
@@ -183,7 +184,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThreeDigitRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("сто", convPtr->ToString(100));
       EXPECT_EQ("сто один", convPtr->ToString(101));
       EXPECT_EQ("двести двенадцать", convPtr->ToString(212));
@@ -198,7 +199,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThousandsRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("одна тысяча", convPtr->ToString(1000));
       EXPECT_EQ("одна тысяча один", convPtr->ToString(1001));
       EXPECT_EQ("двести тысяч один", convPtr->ToString(200001));
@@ -212,7 +213,7 @@ namespace Converter
 
     TEST_F(ConvTest, MillionsRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("один миллион", convPtr->ToString(1000000));
       EXPECT_EQ("один миллион один", convPtr->ToString(1000001));
       EXPECT_EQ("сто миллионов", convPtr->ToString(100 * 1000000));
@@ -229,7 +230,7 @@ namespace Converter
 
     TEST_F(ConvTest, BillionsRU10)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_DECIMAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_DECIMAL));
       EXPECT_EQ("один миллиард", convPtr->ToString(1000000000));
       EXPECT_EQ("один миллиард один", convPtr->ToString(1000000001));
       EXPECT_EQ("один миллиард двенадцать", convPtr->ToString(1000000012));
@@ -242,13 +243,13 @@ namespace Converter
 
     TEST_F(ConvTest, ZeroEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ(std::string("zero"), convPtr->ToString(00));
     }
 
     TEST_F(ConvTest, OnesEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("one", convPtr->ToString(01));
       EXPECT_EQ("two", convPtr->ToString(02));
       EXPECT_EQ("three", convPtr->ToString(03));
@@ -260,7 +261,7 @@ namespace Converter
 
     TEST_F(ConvTest, TeensEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("ten", convPtr->ToString(010));
       EXPECT_EQ("eleven", convPtr->ToString(011));
       EXPECT_EQ("twelve", convPtr->ToString(012));
@@ -273,7 +274,7 @@ namespace Converter
 
     TEST_F(ConvTest, TwoDigitEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("twenty", convPtr->ToString(020));
       EXPECT_EQ("thirty-one", convPtr->ToString(031));
       EXPECT_EQ("fourty-two", convPtr->ToString(042));
@@ -284,7 +285,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThreeDigitEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("one hundred", convPtr->ToString(0100));
       EXPECT_EQ("one hundred and one", convPtr->ToString(0101));
       EXPECT_EQ("two hundred and twelve", convPtr->ToString(0212));
@@ -297,7 +298,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThousandsEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("one thousand", convPtr->ToString(01000));
       EXPECT_EQ("one thousand and one", convPtr->ToString(01001));
       EXPECT_EQ("two hundred thousand and one", convPtr->ToString(0200001));
@@ -311,7 +312,7 @@ namespace Converter
 
     TEST_F(ConvTest, MillionsEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("one million", convPtr->ToString(01000000));
       EXPECT_EQ("one million and one", convPtr->ToString(01000001));
       EXPECT_EQ("one hundred million", convPtr->ToString(0100 * 01000000));
@@ -328,7 +329,7 @@ namespace Converter
 
     TEST_F(ConvTest, BillionsEN8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_ENGLISH, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_EN, BASE_OCTAL));
       EXPECT_EQ("one billion", convPtr->ToString(01000000000));
       EXPECT_EQ("one billion and one", convPtr->ToString(01000000001));
       EXPECT_EQ("one billion and twelve", convPtr->ToString(01000000012));
@@ -341,13 +342,13 @@ namespace Converter
 
     TEST_F(ConvTest, ZeroRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ(std::string("ноль"), convPtr->ToString(00));
     }
 
     TEST_F(ConvTest, OnesRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("один", convPtr->ToString(01));
       EXPECT_EQ("два", convPtr->ToString(02));
       EXPECT_EQ("три", convPtr->ToString(03));
@@ -359,7 +360,7 @@ namespace Converter
 
     TEST_F(ConvTest, TeensRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("десять", convPtr->ToString(010));
       EXPECT_EQ("одиннадцать", convPtr->ToString(011));
       EXPECT_EQ("двенадцать", convPtr->ToString(012));
@@ -372,7 +373,7 @@ namespace Converter
 
     TEST_F(ConvTest, TwoDigitRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("двадцать", convPtr->ToString(020));
       EXPECT_EQ("тридцать один", convPtr->ToString(031));
       EXPECT_EQ("сорок два", convPtr->ToString(042));
@@ -383,7 +384,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThreeDigitRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("сто", convPtr->ToString(0100));
       EXPECT_EQ("сто один", convPtr->ToString(0101));
       EXPECT_EQ("двести двенадцать", convPtr->ToString(0212));
@@ -396,7 +397,7 @@ namespace Converter
 
     TEST_F(ConvTest, ThousandsRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("одна тысяча", convPtr->ToString(01000));
       EXPECT_EQ("одна тысяча один", convPtr->ToString(01001));
       EXPECT_EQ("двести тысяч один", convPtr->ToString(0200001));
@@ -410,7 +411,7 @@ namespace Converter
 
     TEST_F(ConvTest, MillionsRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("один миллион", convPtr->ToString(01000000));
       EXPECT_EQ("один миллион один", convPtr->ToString(01000001));
       EXPECT_EQ("сто миллионов", convPtr->ToString(0100 * 01000000));
@@ -427,7 +428,7 @@ namespace Converter
 
     TEST_F(ConvTest, BillionsRU8)
     {
-      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RUSSIAN, BASE_OCTAL));
+      std::auto_ptr<Converter::NumericConverter> convPtr(GetFactory()->Get(LANG_RU, BASE_OCTAL));
       EXPECT_EQ("один миллиард", convPtr->ToString(01000000000));
       EXPECT_EQ("один миллиард один", convPtr->ToString(01000000001));
       EXPECT_EQ("один миллиард двенадцать", convPtr->ToString(01000000012));
@@ -437,6 +438,5 @@ namespace Converter
       EXPECT_EQ("один миллиард двадцать три миллиона один", convPtr->ToString(01023000001));
       EXPECT_EQ("один миллиард двадцать три тысячи один", convPtr->ToString(01000023001));
     }
-
   }
 }

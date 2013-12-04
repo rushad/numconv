@@ -5,6 +5,9 @@
 #include <boost/lexical_cast.hpp>
 #include <iostream>
 
+static const std::string LANG_EN("EN");
+static const std::string LANG_RU("RU");
+
 bool Str2Uint(const std::string& origStr, unsigned& num)
 {
   unsigned tempNum;
@@ -21,12 +24,13 @@ bool Str2Uint(const std::string& origStr, unsigned& num)
   return false;
 }
 
-bool CheckOptions(int argc, char** argv, Converter::LANG* ptrLang, Converter::BASE* ptrBase)
+bool CheckOptions(int argc, char** argv, std::string& lang, Converter::BASE& base)
 {
   bool langWasSet = false;
   bool baseWasSet = false;
-  Converter::LANG lang = Converter::LANG_ENGLISH;
-  Converter::BASE base = Converter::BASE_DECIMAL;
+  
+  lang = LANG_EN;
+  base = Converter::BASE_DECIMAL;
 
   for (int i = 1; i < argc; ++i)
   {
@@ -41,12 +45,12 @@ bool CheckOptions(int argc, char** argv, Converter::LANG* ptrLang, Converter::BA
     else if(!langWasSet && (opt == "--en"))
     {
       langWasSet = true;
-      lang = Converter::LANG_ENGLISH;
+      lang = LANG_EN;
     }
     else if(!langWasSet && (opt == "--ru"))
     {
       langWasSet = true;
-      lang = Converter::LANG_RUSSIAN;
+      lang = LANG_RU;
     }
     else if(!baseWasSet && (opt == "--dec"))
     {
@@ -68,8 +72,6 @@ bool CheckOptions(int argc, char** argv, Converter::LANG* ptrLang, Converter::BA
     }
   }
 
-  *ptrLang = lang;
-  *ptrBase = base;
   return true;
 }
 
@@ -77,17 +79,17 @@ GTEST_API_ int main(int argc, char** argv)
 {
   setlocale(LC_ALL, "RUS");
 
-  Converter::LANG lang = Converter::LANG_ENGLISH;
-  Converter::BASE base = Converter::BASE_DECIMAL;
+  std::string lang;
+  Converter::BASE base;
 
-  if(!CheckOptions(argc, argv, &lang, &base))
+  if(!CheckOptions(argc, argv, lang, base))
   {
     return -1;
   }
 
   Converter::NumericConverterFactory factory;
-  factory.Add(Converter::LANG_ENGLISH, Converter::EnglishNumericConverter::createInstance);
-  factory.Add(Converter::LANG_RUSSIAN, Converter::RussianNumericConverter::createInstance);
+  factory.Add(LANG_EN, Converter::EnglishNumericConverter::createInstance);
+  factory.Add(LANG_RU, Converter::RussianNumericConverter::createInstance);
 
   std::auto_ptr<Converter::NumericConverter> convPtr(factory.Get(lang, base));
 

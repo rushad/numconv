@@ -26,14 +26,14 @@ namespace Converter
     return ConvertToString(num);
   }
 
-  void NumericConverterFactory::Add(const LANG lang, CreateInstanceFunc func)
+  void NumericConverterFactory::Add(const std::string& lang, CreateInstanceFunc func)
   {
     MapLangFuncs[lang] = func;
   }
 
-  NumericConverter* NumericConverterFactory::Get(LANG lang, BASE base)
+  NumericConverter* NumericConverterFactory::Get(const std::string& lang, BASE base)
   {
-    std::map<LANG, CreateInstanceFunc>::const_iterator i = MapLangFuncs.find(lang);
+    std::map<std::string, CreateInstanceFunc>::const_iterator i = MapLangFuncs.find(lang);
     if(i != MapLangFuncs.end())
       return i->second(base);
     return 0;

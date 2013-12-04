@@ -196,7 +196,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numconv_test.cpp"
+				RelativePath=".\src\numconv_test_en.cpp"
 				>
 			</File>
 			<File

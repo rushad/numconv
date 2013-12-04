@@ -14,12 +14,6 @@ namespace Converter
 
   std::string Concat(const std::string& str1, const std::string& str2, const std::string& delim);
 
-  enum LANG
-  {
-    LANG_ENGLISH,
-    LANG_RUSSIAN
-  };
-
   enum BASE
   {
     BASE_DECIMAL,
@@ -47,11 +41,11 @@ namespace Converter
     typedef NumericConverter*(*CreateInstanceFunc)(const BASE);
 
   public:
-    void Add(const LANG lang, CreateInstanceFunc func);
-    NumericConverter* Get(LANG lang, BASE base);
+    void Add(const std::string& lang, const CreateInstanceFunc func);
+    NumericConverter* Get(const std::string& lang, const BASE base);
 
   private:
-    std::map<LANG, CreateInstanceFunc> MapLangFuncs;
+    std::map<std::string, CreateInstanceFunc> MapLangFuncs;
   };
 
   class EnglishNumericConverter : public NumericConverter
