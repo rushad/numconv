@@ -24,6 +24,10 @@ namespace Converter
   {
   public:
     explicit NumericConverter(const BASE base);
+    virtual ~NumericConverter()
+    {
+    }
+
     std::string ToString(const unsigned num) const;
 
   protected:
@@ -35,7 +39,17 @@ namespace Converter
     const unsigned BaseHundred;
     const unsigned BaseThousand;
   };
+/*
+  class NumericConverter
+  {
+  public:
+    virtual ~NumericConverter()
+    {
+    }
 
+    virtual std::string ConvertToString(const unsigned num) const = 0;
+  };
+*/
   class NumericConverterFactory
   {
     typedef NumericConverter*(*CreateInstanceFunc)(const BASE);

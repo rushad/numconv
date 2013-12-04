@@ -196,7 +196,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\numconv_factory_test.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\numconv_test_en.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numconv_test_ru.cpp"
 				>
 			</File>
 			<File
