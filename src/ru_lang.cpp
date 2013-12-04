@@ -27,19 +27,19 @@ namespace Converter
   }
 
   RussianNumericConverter::RussianNumericConverter(const BASE base)
-    : NumericConverter(base)
+    : Limits(base)
   {
   }
 
-  std::string RussianNumericConverter::ConvertToString(const unsigned num) const
+  std::string RussianNumericConverter::ToString(const unsigned num) const
   {
     return Convert(num, false, false);
   }
 
   std::string RussianNumericConverter::PluralForm(const unsigned num, const char** forms) const
   {
-    unsigned ones = num % Base;
-    unsigned tens = (num % BaseHundred) / Base;
+    unsigned ones = num % Limits.Base();
+    unsigned tens = (num % Limits.BaseHundred()) / Limits.Base();
     if (tens != 1)
     {
       if (ones == 1)
@@ -57,7 +57,7 @@ namespace Converter
     {
       return skipZero ? "" : Constants::Russian::Zero;
     }
-    else if (num < Base)
+    else if (num < Limits.Base())
     {
       if(feminine && num < 3)
       {
@@ -66,42 +66,42 @@ namespace Converter
 
       return Constants::Russian::Ones[num];
     }
-    else if (num < BaseTwenty)
+    else if (num < Limits.BaseTwenty())
     {
-      return Constants::Russian::Teens[num - Base];
+      return Constants::Russian::Teens[num - Limits.Base()];
     }
-    else if (num < BaseHundred)
+    else if (num < Limits.BaseHundred())
     {
-      return Concat(Constants::Russian::Tens[num / Base], Convert(num % Base, true, feminine), Constants::Space);
+      return Concat(Constants::Russian::Tens[num / Limits.Base()], Convert(num % Limits.Base(), true, feminine), Constants::Space);
     }
-    else if (num < BaseThousand)
+    else if (num < Limits.BaseThousand())
     {
       return Concat(
-        Constants::Russian::Hundreds[num / BaseHundred],
-        Convert(num % BaseHundred, true, feminine),
+        Constants::Russian::Hundreds[num / Limits.BaseHundred()],
+        Convert(num % Limits.BaseHundred(), true, feminine),
         Constants::Space);
     }
-    else if (num < BaseThousand * BaseThousand)
+    else if (num < Limits.BaseThousand() * Limits.BaseThousand())
     {
       return Concat(
-        Convert(num / BaseThousand, true, true) + Constants::Space + PluralForm(num / BaseThousand, Constants::Russian::Thousands),
-        Convert(num % BaseThousand, true, feminine),
+        Convert(num / Limits.BaseThousand(), true, true) + Constants::Space + PluralForm(num / Limits.BaseThousand(), Constants::Russian::Thousands),
+        Convert(num % Limits.BaseThousand(), true, feminine),
         Constants::Space);
     }
-    else if (num < BaseThousand * BaseThousand * BaseThousand)
+    else if (num < Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand())
     {
-      unsigned millions = num / (BaseThousand * BaseThousand);
+      unsigned millions = num / (Limits.BaseThousand() * Limits.BaseThousand());
       return Concat(
         Convert(millions, true, false) + Constants::Space + PluralForm(millions, Constants::Russian::Millions),
-        Convert(num % (BaseThousand * BaseThousand), true, feminine),
+        Convert(num % (Limits.BaseThousand() * Limits.BaseThousand()), true, feminine),
         Constants::Space);
     }
     else
     {
-      unsigned billions = num / (BaseThousand * BaseThousand * BaseThousand);
+      unsigned billions = num / (Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand());
       return Concat(
         Convert(billions, true, false) + Constants::Space + PluralForm(billions, Constants::Russian::Billions),
-        Convert(num % (BaseThousand * BaseThousand * BaseThousand), true, feminine),
+        Convert(num % (Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand()), true, feminine),
         Constants::Space);
     }
   }

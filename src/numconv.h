@@ -23,33 +23,48 @@ namespace Converter
   class NumericConverter
   {
   public:
-    explicit NumericConverter(const BASE base);
     virtual ~NumericConverter()
     {
     }
 
-    std::string ToString(const unsigned num) const;
-
-  protected:
-    virtual std::string ConvertToString(const unsigned num) const = 0;
-
-  protected:
-    const unsigned Base;
-    const unsigned BaseTwenty;
-    const unsigned BaseHundred;
-    const unsigned BaseThousand;
+    virtual std::string ToString(const unsigned num) const = 0;
   };
-/*
-  class NumericConverter
+
+  class BaseLimits
   {
   public:
-    virtual ~NumericConverter()
+    BaseLimits(BASE base)
     {
+      switch(base)
+      {
+      case BASE_DECIMAL:
+        BaseValue = 10;
+        break;
+      case BASE_OCTAL:
+        BaseValue = 8;
+        break;
+      }
     }
-
-    virtual std::string ConvertToString(const unsigned num) const = 0;
+    unsigned Base() const
+    {
+      return BaseValue;
+    }
+    unsigned BaseTwenty() const
+    {
+      return 2 * BaseValue;
+    }
+    unsigned BaseHundred() const
+    {
+      return BaseValue * BaseValue;
+    }
+    unsigned BaseThousand() const
+    {
+      return BaseValue * BaseValue * BaseValue;
+    }
+  private:
+    unsigned BaseValue;
   };
-*/
+
   class NumericConverterFactory
   {
     typedef NumericConverter*(*CreateInstanceFunc)(const BASE);
@@ -67,17 +82,17 @@ namespace Converter
   public:
     static NumericConverter* createInstance(const BASE base);
 
+    virtual std::string ToString(const unsigned num) const;
+
   private:
     explicit EnglishNumericConverter(const BASE base);
   
-  protected:
-    virtual std::string ConvertToString(const unsigned num) const;
-
-  private:
     bool InRange1To99(const unsigned num) const;
     unsigned GroupUnit(const unsigned group) const;
     std::string ConvertGroup(const unsigned num, const unsigned group) const;
     std::string Convert(const unsigned num, const bool skipZero) const;
+
+    BaseLimits Limits;
   };
 
   class RussianNumericConverter : public NumericConverter
@@ -85,15 +100,15 @@ namespace Converter
   public:
     static NumericConverter* createInstance(const BASE base);
 
+    virtual std::string ToString(const unsigned num) const;
+
   private:
     explicit RussianNumericConverter(const BASE base);
   
-  protected:
-    virtual std::string ConvertToString(const unsigned num) const;
-
-  private:
     std::string PluralForm(const unsigned num, const char** forms) const;
     std::string Convert(const unsigned num, const bool skipZero, const bool feminine) const;
+
+    BaseLimits Limits;
   };
 
 }

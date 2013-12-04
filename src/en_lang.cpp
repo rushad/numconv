@@ -24,26 +24,26 @@ namespace Converter
   }
 
   EnglishNumericConverter::EnglishNumericConverter(const BASE base)
-    : NumericConverter(base)
+    : Limits(base)
   {
   }
 
-  std::string EnglishNumericConverter::ConvertToString(const unsigned num) const
+  std::string EnglishNumericConverter::ToString(const unsigned num) const
   {
     return Convert(num, false);
   }
 
   bool EnglishNumericConverter::InRange1To99(const unsigned num) const
   {
-    return (num > 0) && (num < BaseHundred);
+    return (num > 0) && (num < Limits.BaseHundred());
   }
 
   unsigned EnglishNumericConverter::GroupUnit(const unsigned group) const
   {
-    unsigned groupUnit = BaseThousand;
+    unsigned groupUnit = Limits.BaseThousand();
     for (unsigned i = 0; i < group - 1; ++i)
     {
-      groupUnit *= BaseThousand;
+      groupUnit *= Limits.BaseThousand();
     }
 
     return groupUnit;
@@ -56,8 +56,8 @@ namespace Converter
 
     for (unsigned div = num, i = 0; i <= group - 1; ++i)
     {
-      groups.push(div % BaseThousand);
-      div /= BaseThousand;
+      groups.push(div % Limits.BaseThousand());
+      div /= Limits.BaseThousand();
     }
 
     bool needAnd = false;
@@ -86,30 +86,30 @@ namespace Converter
     {
       return skipZero ? "" : Constants::English::Zero;
     }
-    else if (num < Base)
+    else if (num < Limits.Base())
     {
       return Constants::English::Ones[num];
     }
-    else if (num < BaseTwenty)
+    else if (num < Limits.BaseTwenty())
     {
-      return Constants::English::Teens[num - Base];
+      return Constants::English::Teens[num - Limits.Base()];
     }
-    else if (num < BaseHundred)
+    else if (num < Limits.BaseHundred())
     {
-      return Concat(Constants::English::Tens[num / Base], Constants::English::Ones[num % Base], Constants::Hyphen);
+      return Concat(Constants::English::Tens[num / Limits.Base()], Constants::English::Ones[num % Limits.Base()], Constants::Hyphen);
     }
-    else if (num < BaseThousand)
+    else if (num < Limits.BaseThousand())
     {
       return Concat(
-        std::string(Constants::English::Ones[num / BaseHundred]) + Constants::Space + Constants::English::Hundred,
-        Convert(num % BaseHundred, true),
+        std::string(Constants::English::Ones[num / Limits.BaseHundred()]) + Constants::Space + Constants::English::Hundred,
+        Convert(num % Limits.BaseHundred(), true),
         Constants::English::And);
     }
-    else if (num < BaseThousand * BaseThousand)
+    else if (num < Limits.BaseThousand() * Limits.BaseThousand())
     {
       return ConvertGroup(num, 1);
     }
-    else if (num < BaseThousand * BaseThousand * BaseThousand)
+    else if (num < Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand())
     {
       return ConvertGroup(num, 2);
     }

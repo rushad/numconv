@@ -13,19 +13,6 @@ namespace Converter
     return str1 + ((!str1.empty() && !str2.empty()) ? delim : "") + str2;
   }
 
-  NumericConverter::NumericConverter(const BASE base)
-    : Base(base == BASE_OCTAL ? 8 : 10)
-    , BaseTwenty(Base * 2)
-    , BaseHundred(Base * Base)
-    , BaseThousand(Base * Base * Base)
-  {
-  }
-
-  std::string NumericConverter::ToString(const unsigned num) const
-  {
-    return ConvertToString(num);
-  }
-
   void NumericConverterFactory::Add(const std::string& lang, CreateInstanceFunc func)
   {
     if(!func)
