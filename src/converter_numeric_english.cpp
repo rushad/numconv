@@ -1,4 +1,4 @@
-#include "english_numeric_converter.h"
+#include "converter_numeric_english.h"
 
 #include <stack>
 
@@ -18,27 +18,27 @@ namespace Converter
     }
   }
 
-  NumericConverter* EnglishNumericConverter::CreateInstance(const BASE base)
+  Numeric* English::CreateInstance(const BASE base)
   {
-    return new EnglishNumericConverter(base);
+    return new English(base);
   }
 
-  EnglishNumericConverter::EnglishNumericConverter(const BASE base)
+  English::English(const BASE base)
     : Limits(base)
   {
   }
 
-  std::string EnglishNumericConverter::ToString(const unsigned num) const
+  std::string English::ToString(const unsigned num) const
   {
     return Convert(num, false);
   }
 
-  bool EnglishNumericConverter::InRange1To99(const unsigned num) const
+  bool English::InRange1To99(const unsigned num) const
   {
     return (num > 0) && (num < Limits.BaseHundred());
   }
 
-  unsigned EnglishNumericConverter::GroupUnit(const unsigned group) const
+  unsigned English::GroupUnit(const unsigned group) const
   {
     unsigned groupUnit = Limits.BaseThousand();
     for (unsigned i = 0; i < group - 1; ++i)
@@ -50,7 +50,7 @@ namespace Converter
   }
 
 
-  std::string EnglishNumericConverter::ConvertGroup(const unsigned num, const unsigned group) const
+  std::string English::ConvertGroup(const unsigned num, const unsigned group) const
   {
     std::stack<unsigned> groups;
 
@@ -80,7 +80,7 @@ namespace Converter
       needAnd ? Constants::English::And : Constants::Space);
   }
 
-  std::string EnglishNumericConverter::Convert(const unsigned num, const bool skipZero) const
+  std::string English::Convert(const unsigned num, const bool skipZero) const
   {
     if (!num)
     {

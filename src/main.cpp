@@ -1,6 +1,6 @@
-#include "numeric_converter_factory.h"
-#include "english_numeric_converter.h"
-#include "russian_numeric_converter.h"
+#include "converter_numeric_factory.h"
+#include "converter_numeric_english.h"
+#include "converter_numeric_russian.h"
 
 #include <gtest/gtest.h>
 
@@ -89,11 +89,11 @@ GTEST_API_ int main(int argc, char** argv)
     return -1;
   }
 
-  Converter::NumericConverterFactory factory;
-  factory.Add(LANG_EN, Converter::EnglishNumericConverter::CreateInstance);
-  factory.Add(LANG_RU, Converter::RussianNumericConverter::CreateInstance);
+  Converter::NumericFactory factory;
+  factory.Add(LANG_EN, Converter::English::CreateInstance);
+  factory.Add(LANG_RU, Converter::Russian::CreateInstance);
 
-  std::auto_ptr<Converter::NumericConverter> convPtr(factory.Get(lang, base));
+  std::auto_ptr<Converter::Numeric> convPtr(factory.Get(lang, base));
 
   unsigned number;
   std::string numbuf;

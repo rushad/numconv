@@ -1,19 +1,19 @@
 #pragma once
 
-#include "numeric_converter.h"
-#include "converter_utils.h"
+#include "converter.h"
+#include "converter_numeric.h"
 
 namespace Converter
 {
-  class EnglishNumericConverter : public NumericConverter
+  class English : public Numeric
   {
   public:
-    static NumericConverter* CreateInstance(const BASE base);
+    static Numeric* CreateInstance(const BASE base);
 
     virtual std::string ToString(const unsigned num) const;
 
   private:
-    explicit EnglishNumericConverter(const BASE base);
+    explicit English(const BASE base);
   
     bool InRange1To99(const unsigned num) const;
     unsigned GroupUnit(const unsigned group) const;

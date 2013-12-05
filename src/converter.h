@@ -1,12 +1,15 @@
 #pragma once
 
-#include "numeric_converter_factory.h"
-
 #include <string>
-#include <map>
 
 namespace Converter
 {
+  enum BASE
+  {
+    BASE_DECIMAL,
+    BASE_OCTAL
+  };
+
   namespace Constants
   {
     extern const std::string Space;
@@ -23,18 +26,7 @@ namespace Converter
     {
     }
 
-    static unsigned GetBaseValue(BASE base)
-    {
-      switch(base)
-      {
-      case BASE_DECIMAL:
-        return 10;
-      case BASE_OCTAL:
-        return 8;
-      default:
-        throw std::exception("Wrong BASE value");
-      }
-    }
+    static unsigned GetBaseValue(BASE base);
 
     unsigned Base() const
     {

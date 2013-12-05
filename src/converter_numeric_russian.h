@@ -1,20 +1,20 @@
 #pragma once
 
-#include "numeric_converter.h"
-#include "numeric_converter_factory.h"
-#include "converter_utils.h"
+#include "converter.h"
+#include "converter_numeric.h"
+#include "converter_numeric_factory.h"
 
 namespace Converter
 {
-  class RussianNumericConverter : public NumericConverter
+  class Russian : public Numeric
   {
   public:
-    static NumericConverter* CreateInstance(const BASE base);
+    static Numeric* CreateInstance(const BASE base);
 
     virtual std::string ToString(const unsigned num) const;
 
   private:
-    explicit RussianNumericConverter(const BASE base);
+    explicit Russian(const BASE base);
   
     std::string PluralForm(const unsigned num, const char** forms) const;
     std::string Convert(const unsigned num, const bool skipZero, const bool feminine) const;

@@ -184,35 +184,35 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\converter_utils.cpp"
+				RelativePath=".\src\converter.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\english_numeric_converter.cpp"
+				RelativePath=".\src\converter_numeric_english.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\converter_numeric_english_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\converter_numeric_factory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\converter_numeric_factory_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\converter_numeric_russian.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\converter_numeric_russian_test.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numconv_factory_test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numconv_test_en.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numconv_test_ru.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numeric_converter_factory.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\russian_numeric_converter.cpp"
 				>
 			</File>
 		</Filter>
@@ -222,23 +222,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\src\converter_utils.h"
+				RelativePath=".\src\converter.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\english_numeric_converter.h"
+				RelativePath=".\src\converter_numeric.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_converter.h"
+				RelativePath=".\src\converter_numeric_english.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_converter_factory.h"
+				RelativePath=".\src\converter_numeric_factory.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\russian_numeric_converter.h"
+				RelativePath=".\src\converter_numeric_russian.h"
 				>
 			</File>
 		</Filter>

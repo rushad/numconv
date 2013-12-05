@@ -1,4 +1,4 @@
-#include "russian_numeric_converter.h"
+#include "converter_numeric_russian.h"
 
 namespace Converter
 {
@@ -21,22 +21,22 @@ namespace Converter
     }
   }
 
-  NumericConverter* RussianNumericConverter::CreateInstance(const BASE base)
+  Numeric* Russian::CreateInstance(const BASE base)
   {
-    return new RussianNumericConverter(base);
+    return new Russian(base);
   }
 
-  RussianNumericConverter::RussianNumericConverter(const BASE base)
+  Russian::Russian(const BASE base)
     : Limits(base)
   {
   }
 
-  std::string RussianNumericConverter::ToString(const unsigned num) const
+  std::string Russian::ToString(const unsigned num) const
   {
     return Convert(num, false, false);
   }
 
-  std::string RussianNumericConverter::PluralForm(const unsigned num, const char** forms) const
+  std::string Russian::PluralForm(const unsigned num, const char** forms) const
   {
     unsigned ones = num % Limits.Base();
     unsigned tens = (num % Limits.BaseHundred()) / Limits.Base();
@@ -51,7 +51,7 @@ namespace Converter
   }
 
 
-  std::string RussianNumericConverter::Convert(const unsigned num, const bool skipZero, const bool feminine) const
+  std::string Russian::Convert(const unsigned num, const bool skipZero, const bool feminine) const
   {
     if (!num)
     {

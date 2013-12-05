@@ -4,10 +4,10 @@
 
 namespace Converter
 {
-  class NumericConverter
+  class Numeric
   {
   public:
-    virtual ~NumericConverter()
+    virtual ~Numeric()
     {
     }
 

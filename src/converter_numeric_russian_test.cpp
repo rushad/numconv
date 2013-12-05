@@ -1,30 +1,31 @@
-#include "russian_numeric_converter.h"
+#include "converter_numeric_russian.h"
+
 #include "gtest/gtest.h"
 
 namespace Converter
 {
   namespace Test
   {
-    class ConvTestRu : public ::testing::Test
+    class ConverterNumericRussianTest : public ::testing::Test
     {
     public:
-      ConvTestRu()
-        : pConv10(RussianNumericConverter::CreateInstance(BASE_DECIMAL))
-        , pConv8(RussianNumericConverter::CreateInstance(BASE_OCTAL))
+      ConverterNumericRussianTest()
+        : pConv10(Russian::CreateInstance(BASE_DECIMAL))
+        , pConv8(Russian::CreateInstance(BASE_OCTAL))
       {
       }
 
     protected:
-      std::auto_ptr<NumericConverter> pConv10;
-      std::auto_ptr<NumericConverter> pConv8;
+      std::auto_ptr<Numeric> pConv10;
+      std::auto_ptr<Numeric> pConv8;
     };
 
-    TEST_F(ConvTestRu, Zero10)
+    TEST_F(ConverterNumericRussianTest, Zero10)
     {
       EXPECT_EQ(std::string("ноль"), pConv10->ToString(0));
     }
 
-    TEST_F(ConvTestRu, Ones10)
+    TEST_F(ConverterNumericRussianTest, Ones10)
     {
       EXPECT_EQ("один", pConv10->ToString(1));
       EXPECT_EQ("два", pConv10->ToString(2));
@@ -37,7 +38,7 @@ namespace Converter
       EXPECT_EQ("девять", pConv10->ToString(9));
     }
 
-    TEST_F(ConvTestRu, Teens10)
+    TEST_F(ConverterNumericRussianTest, Teens10)
     {
       EXPECT_EQ("десять", pConv10->ToString(10));
       EXPECT_EQ("одиннадцать", pConv10->ToString(11));
@@ -51,7 +52,7 @@ namespace Converter
       EXPECT_EQ("девятнадцать", pConv10->ToString(19));
     }
 
-    TEST_F(ConvTestRu, TwoDigit10)
+    TEST_F(ConverterNumericRussianTest, TwoDigit10)
     {
       EXPECT_EQ("двадцать", pConv10->ToString(20));
       EXPECT_EQ("тридцать один", pConv10->ToString(31));
@@ -63,7 +64,7 @@ namespace Converter
       EXPECT_EQ("девяносто семь", pConv10->ToString(97));
     }
 
-    TEST_F(ConvTestRu, ThreeDigit10)
+    TEST_F(ConverterNumericRussianTest, ThreeDigit10)
     {
       EXPECT_EQ("сто", pConv10->ToString(100));
       EXPECT_EQ("сто один", pConv10->ToString(101));
@@ -77,7 +78,7 @@ namespace Converter
       EXPECT_EQ("девятьсот восемьдесят девять", pConv10->ToString(989));
     }
 
-    TEST_F(ConvTestRu, Thousands10)
+    TEST_F(ConverterNumericRussianTest, Thousands10)
     {
       EXPECT_EQ("одна тысяча", pConv10->ToString(1000));
       EXPECT_EQ("одна тысяча один", pConv10->ToString(1001));
@@ -90,7 +91,7 @@ namespace Converter
       EXPECT_EQ("сто тринадцать тысяч один", pConv10->ToString(113001));
     }
 
-    TEST_F(ConvTestRu, Millions10)
+    TEST_F(ConverterNumericRussianTest, Millions10)
     {
       EXPECT_EQ("один миллион", pConv10->ToString(1000000));
       EXPECT_EQ("один миллион один", pConv10->ToString(1000001));
@@ -106,7 +107,7 @@ namespace Converter
       EXPECT_EQ("один миллион сто один", pConv10->ToString(1000101));
     }
 
-    TEST_F(ConvTestRu, Billions10)
+    TEST_F(ConverterNumericRussianTest, Billions10)
     {
       EXPECT_EQ("один миллиард", pConv10->ToString(1000000000));
       EXPECT_EQ("один миллиард один", pConv10->ToString(1000000001));
@@ -118,12 +119,12 @@ namespace Converter
       EXPECT_EQ("один миллиард двадцать три тысячи один", pConv10->ToString(1000023001));
     }
 
-    TEST_F(ConvTestRu, Zero8)
+    TEST_F(ConverterNumericRussianTest, Zero8)
     {
       EXPECT_EQ(std::string("ноль"), pConv8->ToString(00));
     }
 
-    TEST_F(ConvTestRu, Ones8)
+    TEST_F(ConverterNumericRussianTest, Ones8)
     {
       EXPECT_EQ("один", pConv8->ToString(01));
       EXPECT_EQ("два", pConv8->ToString(02));
@@ -134,7 +135,7 @@ namespace Converter
       EXPECT_EQ("семь", pConv8->ToString(07));
     }
 
-    TEST_F(ConvTestRu, Teens8)
+    TEST_F(ConverterNumericRussianTest, Teens8)
     {
       EXPECT_EQ("десять", pConv8->ToString(010));
       EXPECT_EQ("одиннадцать", pConv8->ToString(011));
@@ -146,7 +147,7 @@ namespace Converter
       EXPECT_EQ("семнадцать", pConv8->ToString(017));
     }
 
-    TEST_F(ConvTestRu, TwoDigit8)
+    TEST_F(ConverterNumericRussianTest, TwoDigit8)
     {
       EXPECT_EQ("двадцать", pConv8->ToString(020));
       EXPECT_EQ("тридцать один", pConv8->ToString(031));
@@ -156,7 +157,7 @@ namespace Converter
       EXPECT_EQ("семьдесят пять", pConv8->ToString(075));
     }
 
-    TEST_F(ConvTestRu, ThreeDigit8)
+    TEST_F(ConverterNumericRussianTest, ThreeDigit8)
     {
       EXPECT_EQ("сто", pConv8->ToString(0100));
       EXPECT_EQ("сто один", pConv8->ToString(0101));
@@ -168,7 +169,7 @@ namespace Converter
       EXPECT_EQ("семьсот шестьдесят семь", pConv8->ToString(0767));
     }
 
-    TEST_F(ConvTestRu, Thousands8)
+    TEST_F(ConverterNumericRussianTest, Thousands8)
     {
       EXPECT_EQ("одна тысяча", pConv8->ToString(01000));
       EXPECT_EQ("одна тысяча один", pConv8->ToString(01001));
@@ -181,7 +182,7 @@ namespace Converter
       EXPECT_EQ("сто тринадцать тысяч один", pConv8->ToString(0113001));
     }
 
-    TEST_F(ConvTestRu, Millions8)
+    TEST_F(ConverterNumericRussianTest, Millions8)
     {
       EXPECT_EQ("один миллион", pConv8->ToString(01000000));
       EXPECT_EQ("один миллион один", pConv8->ToString(01000001));
@@ -197,7 +198,7 @@ namespace Converter
       EXPECT_EQ("один миллион сто один", pConv8->ToString(01000101));
     }
 
-    TEST_F(ConvTestRu, Billions8)
+    TEST_F(ConverterNumericRussianTest, Billions8)
     {
       EXPECT_EQ("один миллиард", pConv8->ToString(01000000000));
       EXPECT_EQ("один миллиард один", pConv8->ToString(01000000001));
