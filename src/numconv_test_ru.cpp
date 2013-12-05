@@ -1,4 +1,4 @@
-#include "numconv.h"
+#include "russian_numeric_converter.h"
 #include "gtest/gtest.h"
 
 namespace Converter
@@ -9,8 +9,8 @@ namespace Converter
     {
     public:
       ConvTestRu()
-        : pConv10(RussianNumericConverter::createInstance(BASE_DECIMAL))
-        , pConv8(RussianNumericConverter::createInstance(BASE_OCTAL))
+        : pConv10(RussianNumericConverter::CreateInstance(BASE_DECIMAL))
+        , pConv8(RussianNumericConverter::CreateInstance(BASE_OCTAL))
       {
       }
 

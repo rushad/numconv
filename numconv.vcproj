@@ -184,15 +184,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\en_lang.cpp"
+				RelativePath=".\src\converter_utils.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\english_numeric_converter.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numconv.cpp"
 				>
 			</File>
 			<File
@@ -208,7 +208,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\ru_lang.cpp"
+				RelativePath=".\src\numeric_converter_factory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\russian_numeric_converter.cpp"
 				>
 			</File>
 		</Filter>
@@ -218,7 +222,23 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\src\numconv.h"
+				RelativePath=".\src\converter_utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\english_numeric_converter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_converter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_converter_factory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\russian_numeric_converter.h"
 				>
 			</File>
 		</Filter>

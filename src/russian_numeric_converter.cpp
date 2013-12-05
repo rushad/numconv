@@ -1,4 +1,4 @@
-#include "numconv.h"
+#include "russian_numeric_converter.h"
 
 namespace Converter
 {
@@ -21,7 +21,7 @@ namespace Converter
     }
   }
 
-  NumericConverter* RussianNumericConverter::createInstance(const BASE base)
+  NumericConverter* RussianNumericConverter::CreateInstance(const BASE base)
   {
     return new RussianNumericConverter(base);
   }

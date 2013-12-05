@@ -1,4 +1,4 @@
-#include "numconv.h"
+#include "english_numeric_converter.h"
 
 #include <stack>
 
@@ -18,7 +18,7 @@ namespace Converter
     }
   }
 
-  NumericConverter* EnglishNumericConverter::createInstance(const BASE base)
+  NumericConverter* EnglishNumericConverter::CreateInstance(const BASE base)
   {
     return new EnglishNumericConverter(base);
   }
@@ -118,5 +118,4 @@ namespace Converter
       return ConvertGroup(num, 3);
     }
   }
-
 }
