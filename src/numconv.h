@@ -17,7 +17,7 @@ namespace Converter
   enum BASE
   {
     BASE_DECIMAL,
-    BASE_OCTAL,
+    BASE_OCTAL
   };
 
   class NumericConverter
@@ -42,6 +42,9 @@ namespace Converter
         break;
       case BASE_OCTAL:
         BaseValue = 8;
+        break;
+      default:
+        throw std::exception("Wrong BASE value");
         break;
       }
     }

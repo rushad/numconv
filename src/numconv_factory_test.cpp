@@ -32,5 +32,10 @@ namespace Converter
       NumericConverterFactory factory;
       EXPECT_THROW(factory.Get("TEST", BASE_DECIMAL), std::invalid_argument);
     }
+
+    TEST_F(NumericConverterFactoryTest, BaseLimitsTest)
+    {
+      EXPECT_THROW(BaseLimits((BASE)123), std::exception);
+    }
   }
 }
