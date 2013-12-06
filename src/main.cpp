@@ -90,8 +90,8 @@ GTEST_API_ int main(int argc, char** argv)
   }
 
   Converter::NumericFactory factory;
-  factory.Add(LANG_EN, Converter::NumericEnglish::CreateInstance);
-  factory.Add(LANG_RU, Converter::NumericRussian::CreateInstance);
+  factory.Add(LANG_EN, Converter::CreateNumericEnglish);
+  factory.Add(LANG_RU, Converter::CreateNumericRussian);
 
   std::auto_ptr<Converter::Numeric> convPtr(factory.Get(lang, base));
 

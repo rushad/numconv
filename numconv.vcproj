@@ -200,10 +200,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_factory.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\numeric_factory_test.cpp"
 				>
 			</File>
@@ -213,6 +209,10 @@
 			</File>
 			<File
 				RelativePath=".\src\numeric_russian_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\utils.cpp"
 				>
 			</File>
 		</Filter>
@@ -234,11 +234,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_factory.h"
+				RelativePath=".\src\numeric_english_impl.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\numeric_russian.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_russian_impl.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\utils.h"
 				>
 			</File>
 		</Filter>

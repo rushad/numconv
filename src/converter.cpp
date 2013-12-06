@@ -8,22 +8,24 @@ namespace Converter
     const std::string Hyphen("-");
   }
 
-  std::string Concat(const std::string& str1, const std::string& str2, const std::string& delim)
+  void NumericFactory::Add(const std::string& lang, CreateInstanceFunc func)
   {
-    return str1 + ((!str1.empty() && !str2.empty()) ? delim : "") + str2;
+    if(!func)
+      throw std::invalid_argument("NULL CreateInstance not allowed");
+
+    std::map<std::string, CreateInstanceFunc>::const_iterator i = MapLangFuncs.find(lang);
+    if(i != MapLangFuncs.end())
+      throw std::invalid_argument("Language " + lang + " is already defined");
+
+    MapLangFuncs[lang] = func;
   }
 
-  unsigned BaseLimits::GetBaseValue(BASE base)
+  Numeric* NumericFactory::Get(const std::string& lang, BASE base)
   {
-    switch(base)
-    {
-    case BASE_DECIMAL:
-      return 10;
-    case BASE_OCTAL:
-      return 8;
-    default:
-      throw std::exception("Wrong BASE value");
-    }
-  }
+    std::map<std::string, CreateInstanceFunc>::const_iterator i = MapLangFuncs.find(lang);
+    if(i == MapLangFuncs.end())
+      throw std::invalid_argument("Language " + lang + " is not defined");
 
+    return i->second(base);
+  }
 }

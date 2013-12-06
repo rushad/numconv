@@ -10,8 +10,8 @@ namespace Converter
     {
     public:
       ConverterNumericRussianTest()
-        : pConv10(NumericRussian::CreateInstance(BASE_DECIMAL))
-        , pConv8(NumericRussian::CreateInstance(BASE_OCTAL))
+        : pConv10(CreateNumericRussian(BASE_DECIMAL))
+        , pConv8(CreateNumericRussian(BASE_OCTAL))
       {
       }
 

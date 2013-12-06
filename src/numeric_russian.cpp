@@ -1,4 +1,4 @@
-#include "numeric_russian.h"
+#include "numeric_russian_impl.h"
 
 namespace Converter
 {
@@ -23,7 +23,7 @@ namespace Converter
   const std::string NumericRussian::Billions[3] = 
     { "миллиард", "миллиарда", "миллиардов" };
 
-  Numeric* NumericRussian::CreateInstance(const BASE base)
+  Numeric* CreateNumericRussian(const BASE base)
   {
     return new NumericRussian(base);
   }
@@ -74,18 +74,18 @@ namespace Converter
     }
     else if (num < Limits.BaseHundred())
     {
-      return Concat(Tens[num / Limits.Base()], Convert(num % Limits.Base(), true, feminine), Constants::Space);
+      return Utils::Concat(Tens[num / Limits.Base()], Convert(num % Limits.Base(), true, feminine), Constants::Space);
     }
     else if (num < Limits.BaseThousand())
     {
-      return Concat(
+      return Utils::Concat(
         Hundreds[num / Limits.BaseHundred()],
         Convert(num % Limits.BaseHundred(), true, feminine),
         Constants::Space);
     }
     else if (num < Limits.BaseThousand() * Limits.BaseThousand())
     {
-      return Concat(
+      return Utils::Concat(
         Convert(num / Limits.BaseThousand(), true, true) + Constants::Space + PluralForm(num / Limits.BaseThousand(), Thousands),
         Convert(num % Limits.BaseThousand(), true, feminine),
         Constants::Space);
@@ -93,7 +93,7 @@ namespace Converter
     else if (num < Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand())
     {
       unsigned millions = num / (Limits.BaseThousand() * Limits.BaseThousand());
-      return Concat(
+      return Utils::Concat(
         Convert(millions, true, false) + Constants::Space + PluralForm(millions, Millions),
         Convert(num % (Limits.BaseThousand() * Limits.BaseThousand()), true, feminine),
         Constants::Space);
@@ -101,7 +101,7 @@ namespace Converter
     else
     {
       unsigned billions = num / (Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand());
-      return Concat(
+      return Utils::Concat(
         Convert(billions, true, false) + Constants::Space + PluralForm(billions, Billions),
         Convert(num % (Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand()), true, feminine),
         Constants::Space);

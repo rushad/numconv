@@ -1,4 +1,5 @@
 #include "numeric_english.h"
+#include "numeric_english_impl.h"
 
 #include <stack>
 
@@ -16,7 +17,7 @@ namespace Converter
   const std::string NumericEnglish::GroupUnits[] = 
     { "", "thousand", "million", "billion" };
 
-  Numeric* NumericEnglish::CreateInstance(const BASE base)
+  Numeric* CreateNumericEnglish(const BASE base)
   {
     return new NumericEnglish(base);
   }
@@ -72,7 +73,7 @@ namespace Converter
 
     unsigned groupUnit = GroupUnit(group);
 
-    return Concat(
+    return Utils::Concat(
       Convert(num / groupUnit, true) + Constants::Space + GroupUnits[group],
       Convert(num % groupUnit, true),
       needAnd ? And : Constants::Space);
@@ -94,11 +95,11 @@ namespace Converter
     }
     else if (num < Limits.BaseHundred())
     {
-      return Concat(Tens[num / Limits.Base()], Ones[num % Limits.Base()], Constants::Hyphen);
+      return Utils::Concat(Tens[num / Limits.Base()], Ones[num % Limits.Base()], Constants::Hyphen);
     }
     else if (num < Limits.BaseThousand())
     {
-      return Concat(
+      return Utils::Concat(
         std::string(Ones[num / Limits.BaseHundred()]) + Constants::Space + Hundred,
         Convert(num % Limits.BaseHundred(), true),
         And);

@@ -10,8 +10,8 @@ namespace Converter
     {
     public:
       ConverterNumericEnglishTest()
-        : pConv10(NumericEnglish::CreateInstance(BASE_DECIMAL))
-        , pConv8(NumericEnglish::CreateInstance(BASE_OCTAL))
+        : pConv10(CreateNumericEnglish(BASE_DECIMAL))
+        , pConv8(CreateNumericEnglish(BASE_OCTAL))
       {
       }
 

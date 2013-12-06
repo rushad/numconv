@@ -1,5 +1,6 @@
 #include "converter.h"
 #include "numeric_factory.h"
+#include "utils.h"
 
 #include "gtest/gtest.h"
 
@@ -37,7 +38,7 @@ namespace Converter
 
     TEST_F(ConverterNumericFactoryTest, BaseLimitsTest)
     {
-      EXPECT_THROW(BaseLimits((BASE)123), std::exception);
+      EXPECT_THROW(Utils::BaseLimits((BASE)123), std::exception);
     }
   }
 }

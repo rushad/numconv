@@ -1,5 +1,7 @@
 #pragma once
 
+#include "numeric.h"
+#include <map>
 #include <string>
 
 namespace Converter
@@ -16,40 +18,15 @@ namespace Converter
     extern const std::string Hyphen;
   }
 
-  std::string Concat(const std::string& str1, const std::string& str2, const std::string& delim);
-
-  class BaseLimits
+  class NumericFactory
   {
+    typedef Numeric*(*CreateInstanceFunc)(const BASE);
+
   public:
-    BaseLimits(BASE base)
-      : BaseValue(GetBaseValue(base))
-    {
-    }
-
-    static unsigned GetBaseValue(BASE base);
-
-    unsigned Base() const
-    {
-      return BaseValue;
-    }
-
-    unsigned BaseTwenty() const
-    {
-      return 2 * BaseValue;
-    }
-
-    unsigned BaseHundred() const
-    {
-      return BaseValue * BaseValue;
-    }
-
-    unsigned BaseThousand() const
-    {
-      return BaseValue * BaseValue * BaseValue;
-    }
+    void Add(const std::string& lang, const CreateInstanceFunc func);
+    Numeric* Get(const std::string& lang, const BASE base);
 
   private:
-    const unsigned BaseValue;
+    std::map<std::string, CreateInstanceFunc> MapLangFuncs;
   };
-
 }
