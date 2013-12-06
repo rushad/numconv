@@ -7,7 +7,7 @@ namespace Converter
 {
   namespace Test
   {
-    class ConverterNumericFactoryTest : public ::testing::Test
+    class TestNumericFactory : public ::testing::Test
     {
     public:
       static Numeric* createInstance(const BASE base)
@@ -16,26 +16,30 @@ namespace Converter
       }
     };
 
-    TEST_F(ConverterNumericFactoryTest, NullCreateInstanceFuncNotAllowed)
+    class TestUtils : public ::testing::Test
+    {
+    };
+
+    TEST_F(TestNumericFactory, NullCreateInstanceFuncNotAllowed)
     {
       NumericFactory factory;
       EXPECT_THROW(factory.Add("TEST", 0), std::invalid_argument);
     }
 
-    TEST_F(ConverterNumericFactoryTest, LanguageRedefenitionNotAllowed)
+    TEST_F(TestNumericFactory, LanguageRedefenitionNotAllowed)
     {
       NumericFactory factory;
       factory.Add("TEST", createInstance);
       EXPECT_THROW(factory.Add("TEST", createInstance), std::invalid_argument);
     }
 
-    TEST_F(ConverterNumericFactoryTest, GetWithWrongLangShouldThrowException)
+    TEST_F(TestNumericFactory, GetWithWrongLangShouldThrowException)
     {
       NumericFactory factory;
       EXPECT_THROW(factory.Get("TEST", BASE_DECIMAL), std::invalid_argument);
     }
 
-    TEST_F(ConverterNumericFactoryTest, BaseLimitsTest)
+    TEST_F(TestUtils, BaseLimitsWithWrongBaseShouldThrowException)
     {
       EXPECT_THROW(Utils::BaseLimits((BASE)123), std::exception);
     }

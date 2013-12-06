@@ -6,10 +6,10 @@ namespace Converter
 {
   namespace Test
   {
-    class ConverterNumericEnglishTest : public ::testing::Test
+    class TestNumericEnglish : public ::testing::Test
     {
     public:
-      ConverterNumericEnglishTest()
+      TestNumericEnglish()
         : pConv10(CreateNumericEnglish(BASE_DECIMAL))
         , pConv8(CreateNumericEnglish(BASE_OCTAL))
       {
@@ -20,12 +20,12 @@ namespace Converter
       std::auto_ptr<Numeric> pConv8;
     };
 
-    TEST_F(ConverterNumericEnglishTest, Zero10)
+    TEST_F(TestNumericEnglish, Zero10)
     {
       EXPECT_EQ(std::string("zero"), pConv10->ToString(0));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Ones10)
+    TEST_F(TestNumericEnglish, Ones10)
     {
       EXPECT_EQ("one", pConv10->ToString(1));
       EXPECT_EQ("two", pConv10->ToString(2));
@@ -38,7 +38,7 @@ namespace Converter
       EXPECT_EQ("nine", pConv10->ToString(9));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Teens10)
+    TEST_F(TestNumericEnglish, Teens10)
     {
       EXPECT_EQ("ten", pConv10->ToString(10));
       EXPECT_EQ("eleven", pConv10->ToString(11));
@@ -52,7 +52,7 @@ namespace Converter
       EXPECT_EQ("nineteen", pConv10->ToString(19));
     }
 
-    TEST_F(ConverterNumericEnglishTest, TwoDigit10)
+    TEST_F(TestNumericEnglish, TwoDigit10)
     {
       EXPECT_EQ("twenty", pConv10->ToString(20));
       EXPECT_EQ("thirty-one", pConv10->ToString(31));
@@ -64,7 +64,7 @@ namespace Converter
       EXPECT_EQ("ninety-seven", pConv10->ToString(97));
     }
 
-    TEST_F(ConverterNumericEnglishTest, ThreeDigit10)
+    TEST_F(TestNumericEnglish, ThreeDigit10)
     {
       EXPECT_EQ("one hundred", pConv10->ToString(100));
       EXPECT_EQ("one hundred and one", pConv10->ToString(101));
@@ -78,7 +78,7 @@ namespace Converter
       EXPECT_EQ("nine hundred and eighty-nine", pConv10->ToString(989));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Thousands10)
+    TEST_F(TestNumericEnglish, Thousands10)
     {
       EXPECT_EQ("one thousand", pConv10->ToString(1000));
       EXPECT_EQ("one thousand and one", pConv10->ToString(1001));
@@ -91,7 +91,7 @@ namespace Converter
       EXPECT_EQ("one hundred and thirteen thousand and one", pConv10->ToString(113001));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Millions10)
+    TEST_F(TestNumericEnglish, Millions10)
     {
       EXPECT_EQ("one million", pConv10->ToString(1000000));
       EXPECT_EQ("one million and one", pConv10->ToString(1000001));
@@ -107,7 +107,7 @@ namespace Converter
       EXPECT_EQ("one million one hundred and one", pConv10->ToString(1000101));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Billions10)
+    TEST_F(TestNumericEnglish, Billions10)
     {
       EXPECT_EQ("one billion", pConv10->ToString(1000000000));
       EXPECT_EQ("one billion and one", pConv10->ToString(1000000001));
@@ -119,12 +119,12 @@ namespace Converter
       EXPECT_EQ("one billion and twenty-three thousand and one", pConv10->ToString(1000023001));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Zero8)
+    TEST_F(TestNumericEnglish, Zero8)
     {
       EXPECT_EQ(std::string("zero"), pConv8->ToString(00));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Ones8)
+    TEST_F(TestNumericEnglish, Ones8)
     {
       EXPECT_EQ("one", pConv8->ToString(01));
       EXPECT_EQ("two", pConv8->ToString(02));
@@ -135,7 +135,7 @@ namespace Converter
       EXPECT_EQ("seven", pConv8->ToString(07));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Teens8)
+    TEST_F(TestNumericEnglish, Teens8)
     {
       EXPECT_EQ("ten", pConv8->ToString(010));
       EXPECT_EQ("eleven", pConv8->ToString(011));
@@ -147,7 +147,7 @@ namespace Converter
       EXPECT_EQ("seventeen", pConv8->ToString(017));
     }
 
-    TEST_F(ConverterNumericEnglishTest, TwoDigit8)
+    TEST_F(TestNumericEnglish, TwoDigit8)
     {
       EXPECT_EQ("twenty", pConv8->ToString(020));
       EXPECT_EQ("thirty-one", pConv8->ToString(031));
@@ -157,7 +157,7 @@ namespace Converter
       EXPECT_EQ("seventy-five", pConv8->ToString(075));
     }
 
-    TEST_F(ConverterNumericEnglishTest, ThreeDigit8)
+    TEST_F(TestNumericEnglish, ThreeDigit8)
     {
       EXPECT_EQ("one hundred", pConv8->ToString(0100));
       EXPECT_EQ("one hundred and one", pConv8->ToString(0101));
@@ -169,7 +169,7 @@ namespace Converter
       EXPECT_EQ("seven hundred and sixty-seven", pConv8->ToString(0767));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Thousands8)
+    TEST_F(TestNumericEnglish, Thousands8)
     {
       EXPECT_EQ("one thousand", pConv8->ToString(01000));
       EXPECT_EQ("one thousand and one", pConv8->ToString(01001));
@@ -182,7 +182,7 @@ namespace Converter
       EXPECT_EQ("one hundred and thirteen thousand and one", pConv8->ToString(0113001));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Millions8)
+    TEST_F(TestNumericEnglish, Millions8)
     {
       EXPECT_EQ("one million", pConv8->ToString(01000000));
       EXPECT_EQ("one million and one", pConv8->ToString(01000001));
@@ -198,7 +198,7 @@ namespace Converter
       EXPECT_EQ("one million one hundred and one", pConv8->ToString(01000101));
     }
 
-    TEST_F(ConverterNumericEnglishTest, Billions8)
+    TEST_F(TestNumericEnglish, Billions8)
     {
       EXPECT_EQ("one billion", pConv8->ToString(01000000000));
       EXPECT_EQ("one billion and one", pConv8->ToString(01000000001));
