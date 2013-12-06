@@ -1,4 +1,4 @@
-#include "converter_numeric_russian.h"
+#include "numeric_russian.h"
 
 #include "gtest/gtest.h"
 
@@ -10,8 +10,8 @@ namespace Converter
     {
     public:
       ConverterNumericRussianTest()
-        : pConv10(Russian::CreateInstance(BASE_DECIMAL))
-        , pConv8(Russian::CreateInstance(BASE_OCTAL))
+        : pConv10(NumericRussian::CreateInstance(BASE_DECIMAL))
+        , pConv8(NumericRussian::CreateInstance(BASE_OCTAL))
       {
       }
 
@@ -209,5 +209,6 @@ namespace Converter
       EXPECT_EQ("один миллиард двадцать три миллиона один", pConv8->ToString(01023000001));
       EXPECT_EQ("один миллиард двадцать три тысячи один", pConv8->ToString(01000023001));
     }
+
   }
 }

@@ -188,31 +188,31 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_numeric_english.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\converter_numeric_english_test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\converter_numeric_factory.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\converter_numeric_factory_test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\converter_numeric_russian.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\converter_numeric_russian_test.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_english.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_english_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_factory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_factory_test.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_russian.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\numeric_russian_test.cpp"
 				>
 			</File>
 		</Filter>
@@ -226,19 +226,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_numeric.h"
+				RelativePath=".\src\numeric.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_numeric_english.h"
+				RelativePath=".\src\numeric_english.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_numeric_factory.h"
+				RelativePath=".\src\numeric_factory.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_numeric_russian.h"
+				RelativePath=".\src\numeric_russian.h"
 				>
 			</File>
 		</Filter>

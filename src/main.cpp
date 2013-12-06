@@ -1,6 +1,6 @@
-#include "converter_numeric_factory.h"
-#include "converter_numeric_english.h"
-#include "converter_numeric_russian.h"
+#include "numeric_factory.h"
+#include "numeric_english.h"
+#include "numeric_russian.h"
 
 #include <gtest/gtest.h>
 
@@ -90,8 +90,8 @@ GTEST_API_ int main(int argc, char** argv)
   }
 
   Converter::NumericFactory factory;
-  factory.Add(LANG_EN, Converter::English::CreateInstance);
-  factory.Add(LANG_RU, Converter::Russian::CreateInstance);
+  factory.Add(LANG_EN, Converter::NumericEnglish::CreateInstance);
+  factory.Add(LANG_RU, Converter::NumericRussian::CreateInstance);
 
   std::auto_ptr<Converter::Numeric> convPtr(factory.Get(lang, base));
 

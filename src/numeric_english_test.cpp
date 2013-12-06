@@ -1,4 +1,4 @@
-﻿#include "converter_numeric_english.h"
+﻿#include "numeric_english.h"
 
 #include "gtest/gtest.h"
 
@@ -10,8 +10,8 @@ namespace Converter
     {
     public:
       ConverterNumericEnglishTest()
-        : pConv10(English::CreateInstance(BASE_DECIMAL))
-        , pConv8(English::CreateInstance(BASE_OCTAL))
+        : pConv10(NumericEnglish::CreateInstance(BASE_DECIMAL))
+        , pConv8(NumericEnglish::CreateInstance(BASE_OCTAL))
       {
       }
 
