@@ -188,6 +188,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\converter_test.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
@@ -197,10 +201,6 @@
 			</File>
 			<File
 				RelativePath=".\src\numeric_english_test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\numeric_factory_test.cpp"
 				>
 			</File>
 			<File

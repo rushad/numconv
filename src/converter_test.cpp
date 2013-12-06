@@ -1,5 +1,4 @@
 #include "converter.h"
-#include "numeric_factory.h"
 #include "utils.h"
 
 #include "gtest/gtest.h"
