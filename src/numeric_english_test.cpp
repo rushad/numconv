@@ -16,8 +16,8 @@ namespace Converter
       }
 
     protected:
-      std::auto_ptr<Numeric> pConv10;
-      std::auto_ptr<Numeric> pConv8;
+      NumericPtr pConv10;
+      NumericPtr pConv8;
     };
 
     TEST_F(TestNumericEnglish, Zero10)

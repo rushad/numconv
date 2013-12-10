@@ -20,7 +20,7 @@ namespace Converter
     MapLangFuncs[lang] = func;
   }
 
-  Numeric* NumericFactory::Get(const std::string& lang, BASE base)
+  NumericPtr NumericFactory::Get(const std::string& lang, BASE base)
   {
     std::map<std::string, CreateInstanceFunc>::const_iterator i = MapLangFuncs.find(lang);
     if(i == MapLangFuncs.end())

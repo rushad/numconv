@@ -7,12 +7,20 @@ namespace Converter
 {
   namespace Test
   {
+    class NumericFake : public Numeric
+    {
+    public:
+      virtual std::string ToString(const unsigned num) const
+      {
+        return "";
+      }
+    };
     class TestNumericFactory : public ::testing::Test
     {
     public:
-      static Numeric* createInstance(const BASE base)
+      static NumericPtr createInstance(const BASE base)
       {
-        return 0;
+        return NumericPtr(new NumericFake());
       }
     };
 
@@ -31,6 +39,14 @@ namespace Converter
       NumericFactory factory;
       factory.Add("TEST", createInstance);
       EXPECT_THROW(factory.Add("TEST", createInstance), std::invalid_argument);
+    }
+
+    TEST_F(TestNumericFactory, GetShouldReturnValidNumericObject)
+    {
+      NumericFactory factory;
+      factory.Add("TEST", createInstance);
+      NumericPtr numeric = factory.Get("TEST", BASE_DECIMAL);
+      EXPECT_NE(static_cast<Numeric*>(0), numeric.get());
     }
 
     TEST_F(TestNumericFactory, GetWithWrongLangShouldThrowException)

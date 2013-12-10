@@ -5,5 +5,5 @@
 
 namespace Converter
 {
-  Numeric* CreateNumericEnglish(const BASE base);
+  NumericPtr CreateNumericEnglish(const BASE base);
 }

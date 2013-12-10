@@ -196,7 +196,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_english.cpp"
+				RelativePath=".\src\numeric_english_internal.cpp"
 				>
 			</File>
 			<File
@@ -204,7 +204,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_russian.cpp"
+				RelativePath=".\src\numeric_russian_internal.cpp"
 				>
 			</File>
 			<File
@@ -234,7 +234,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_english_impl.h"
+				RelativePath=".\src\numeric_english_internal.h"
 				>
 			</File>
 			<File
@@ -242,7 +242,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_russian_impl.h"
+				RelativePath=".\src\numeric_russian_internal.h"
 				>
 			</File>
 			<File
