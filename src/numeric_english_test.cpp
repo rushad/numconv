@@ -8,7 +8,7 @@ namespace Converter
   {
     class TestNumericEnglish : public ::testing::Test
     {
-    public:
+    protected:
       TestNumericEnglish()
         : pConv10(CreateNumericEnglish(BASE_DECIMAL))
         , pConv8(CreateNumericEnglish(BASE_OCTAL))
