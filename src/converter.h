@@ -9,6 +9,7 @@
 namespace Converter
 {
   typedef std::auto_ptr<Numeric> NumericPtr;
+
   enum BASE
   {
     BASE_DECIMAL,

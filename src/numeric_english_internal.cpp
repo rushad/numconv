@@ -16,8 +16,8 @@ namespace Converter
     { "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
     const std::string NumericEnglish::Tens[] = 
     { "", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
-    const std::string NumericEnglish::GroupUnits[] = 
-    { "", "thousand", "million", "billion" };
+    const std::string NumericEnglish::GroupUnits[MaxGroup] = 
+    { "thousand", "million", "billion" };
 
     NumericEnglish::NumericEnglish(const BASE base)
       : Limits(base)
@@ -26,6 +26,9 @@ namespace Converter
 
     std::string NumericEnglish::ToString(const unsigned num) const
     {
+      if(num > MaxUint32)
+        throw std::invalid_argument("Argument is out of range");
+
       return Convert(num, false);
     }
 
@@ -37,7 +40,7 @@ namespace Converter
     unsigned NumericEnglish::GroupUnit(const unsigned group) const
     {
       unsigned groupUnit = Limits.BaseThousand();
-      for (unsigned i = 0; i < group - 1; ++i)
+      for (unsigned i = 0; i < group; ++i)
       {
         groupUnit *= Limits.BaseThousand();
       }
@@ -50,7 +53,7 @@ namespace Converter
     {
       std::stack<unsigned> groups;
 
-      for (unsigned div = num, i = 0; i <= group - 1; ++i)
+      for (unsigned div = num, i = 0; i <= group; ++i)
       {
         groups.push(div % Limits.BaseThousand());
         div /= Limits.BaseThousand();
@@ -74,6 +77,20 @@ namespace Converter
         Convert(num / groupUnit, true) + Constants::Space + GroupUnits[group],
         Convert(num % groupUnit, true),
         needAnd ? And : Constants::Space);
+    }
+
+    unsigned NumericEnglish::GetRank(const unsigned num) const
+    {
+      unsigned rank = 0;
+      unsigned limit = Limits.BaseThousand() * Limits.BaseThousand();
+      for(; rank < MaxGroup - 1; ++rank)
+      {
+        if(num < limit)
+          break;
+        limit *= Limits.BaseThousand();
+      }
+
+      return rank;      
     }
 
     std::string NumericEnglish::Convert(const unsigned num, const bool skipZero) const
@@ -101,18 +118,8 @@ namespace Converter
           Convert(num % Limits.BaseHundred(), true),
           And);
       }
-      else if (num < Limits.BaseThousand() * Limits.BaseThousand())
-      {
-        return ConvertGroup(num, 1);
-      }
-      else if (num < Limits.BaseThousand() * Limits.BaseThousand() * Limits.BaseThousand())
-      {
-        return ConvertGroup(num, 2);
-      }
-      else
-      {
-        return ConvertGroup(num, 3);
-      }
+
+      return ConvertGroup(num, GetRank(num));
     }
   }
 

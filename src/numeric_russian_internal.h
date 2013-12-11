@@ -16,10 +16,17 @@ namespace Converter
 
     private:
       typedef std::string GroupForms[3];
+      enum Gender { GENDER_MASCULINE, GENDER_FEMININE };
+      struct GroupProps
+      {
+        GroupForms Forms;
+        Gender Gender;
+      };
       std::string PluralForm(const unsigned num, const GroupForms& forms) const;
-      std::string Convert(const unsigned num, const bool skipZero, const bool feminine) const;
-      std::string ConvertGroup(const unsigned num, const bool skipZero, const bool feminine) const;
-      std::string ComposeHighestGroupAndRemain(const unsigned group, const bool groupGender, const GroupForms& forms, const unsigned remain) const;
+      std::string Convert(const unsigned num, const bool skipZero, const Gender gender) const;
+      std::string ConvertGroup(const unsigned num, const bool skipZero, const Gender gender) const;
+      std::string ComposeHighestGroupAndRemain(const unsigned group, const Gender groupGender, const GroupForms& forms, const unsigned remain) const;
+      int GetRank(const unsigned num, unsigned& groupBase) const;
 
       const Utils::BaseLimits Limits;
 
@@ -30,9 +37,9 @@ namespace Converter
       static const std::string Tens[];
       static const std::string Hundreds[10];
 
-      static const GroupForms ThousandForms;
-      static const GroupForms MillionForms;
-      static const GroupForms BillionForms;
+      static const unsigned MaxUint32 = 0xffffffff;
+      static const int MaxGroup = 3;
+      static const GroupProps Groups[MaxGroup];
     };
   }
 }
