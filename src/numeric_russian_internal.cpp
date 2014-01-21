@@ -15,11 +15,11 @@ namespace Converter
     const std::string NumericRussian::Tens[] = 
     { "", "", "двадцать", "тридцать", "сорок", "п€тьдес€т", 
     "шестьдес€т", "семьдес€т", "восемьдес€т", "дев€носто" };
-    const std::string NumericRussian::Hundreds[10] = 
+    const std::string NumericRussian::Hundreds[] = 
     { "", "сто", "двести", "триста", "четыреста", "п€тьсот",
     "шестьсот", "семьсот", "восемьсот", "дев€тьсот" };
 
-    const NumericRussian::GroupProps NumericRussian::Groups[3] = {
+    const NumericRussian::GroupProps NumericRussian::Groups[MaxGroup] = {
       { { "тыс€ча", "тыс€чи", "тыс€ч" }, GENDER_FEMININE }, 
       { {"миллион", "миллиона", "миллионов" }, GENDER_MASCULINE },
       { { "миллиард", "миллиарда", "миллиардов" }, GENDER_MASCULINE }
@@ -52,7 +52,14 @@ namespace Converter
       return forms[2];
     }
 
-    std::string NumericRussian::ConvertGroup(const unsigned num, const bool skipZero, const Gender gender) const
+    bool NumericRussian::IsFeminineDigit(const Gender groupGender, const unsigned digit) const
+    {
+      if (groupGender != GENDER_FEMININE)
+        return false;
+      return (digit == 1) || (digit == 2);
+    }
+
+    std::string NumericRussian::ConvertGroup(const unsigned num, const bool skipZero, const Gender groupGender) const
     {
       if (!num)
       {
@@ -60,12 +67,7 @@ namespace Converter
       }
       else if (num < Limits.Base())
       {
-        if((gender == GENDER_FEMININE) && (num < 3))
-        {
-          return OnesF[num];
-        }
-
-        return Ones[num];
+        return IsFeminineDigit(groupGender, num) ? OnesF[num] : Ones[num];
       }
       else if (num < Limits.BaseTwenty())
       {
@@ -73,13 +75,16 @@ namespace Converter
       }
       else if (num < Limits.BaseHundred())
       {
-        return Utils::Concat(Tens[num / Limits.Base()], Convert(num % Limits.Base(), true, gender), Constants::Space);
+        return Utils::Concat(
+          Tens[num / Limits.Base()],
+          Convert(num % Limits.Base(), true, groupGender),
+          Constants::Space);
       }
       else
       {
         return Utils::Concat(
           Hundreds[num / Limits.BaseHundred()],
-          Convert(num % Limits.BaseHundred(), true, gender),
+          Convert(num % Limits.BaseHundred(), true, groupGender),
           Constants::Space);
       }
     }

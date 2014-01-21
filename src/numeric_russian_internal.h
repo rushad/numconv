@@ -27,6 +27,7 @@ namespace Converter
       std::string ConvertGroup(const unsigned num, const bool skipZero, const Gender gender) const;
       std::string ComposeHighestGroupAndRemain(const unsigned group, const Gender groupGender, const GroupForms& forms, const unsigned remain) const;
       int GetRank(const unsigned num, unsigned& groupBase) const;
+      bool IsFeminineDigit(const Gender groupGender, const unsigned digit) const;
 
       const Utils::BaseLimits Limits;
 
@@ -35,7 +36,7 @@ namespace Converter
       static const std::string OnesF[];
       static const std::string Teens[];
       static const std::string Tens[];
-      static const std::string Hundreds[10];
+      static const std::string Hundreds[];
 
       static const unsigned MaxUint32 = 0xffffffff;
       static const int MaxGroup = 3;
