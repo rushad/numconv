@@ -89,7 +89,7 @@ namespace Converter
       }
     }
 
-    int NumericRussian::GetRank(const unsigned num, unsigned& groupBase) const
+    unsigned NumericRussian::GetRank(const unsigned num, unsigned& groupBase) const
     {
       int groupNo = 0;
       while(true)
@@ -120,7 +120,7 @@ namespace Converter
         return ConvertGroup(num, skipZero, gender);
       }
 
-      int groupNo = GetRank(num, groupBase);
+      unsigned groupNo = GetRank(num, groupBase);
 
       const unsigned group = num / groupBase;
       const unsigned remain = num % groupBase;

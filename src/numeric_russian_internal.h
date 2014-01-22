@@ -26,7 +26,7 @@ namespace Converter
       std::string Convert(const unsigned num, const bool skipZero, const Gender gender) const;
       std::string ConvertGroup(const unsigned num, const bool skipZero, const Gender gender) const;
       std::string ComposeHighestGroupAndRemain(const unsigned group, const Gender groupGender, const GroupForms& forms, const unsigned remain) const;
-      int GetRank(const unsigned num, unsigned& groupBase) const;
+      unsigned GetRank(const unsigned num, unsigned& groupBase) const;
       bool IsFeminineDigit(const Gender groupGender, const unsigned digit) const;
 
       const Utils::BaseLimits Limits;
