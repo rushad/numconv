@@ -16,8 +16,8 @@ namespace Converter
       }
 
     protected:
-      NumericPtr pConv10;
-      NumericPtr pConv8;
+      Numeric::Ptr pConv10;
+      Numeric::Ptr pConv8;
     };
 
     TEST_F(TestNumericEnglish, Zero10)

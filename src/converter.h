@@ -8,8 +8,6 @@
 
 namespace Converter
 {
-  typedef std::auto_ptr<Numeric> NumericPtr;
-
   enum BASE
   {
     BASE_DECIMAL,
@@ -25,10 +23,10 @@ namespace Converter
   class NumericFactory
   {
   public:
-    typedef NumericPtr(*CreateInstanceFunc)(const BASE);
+    typedef Numeric::Ptr(*CreateInstanceFunc)(const BASE);
 
     void Add(const std::string& lang, const CreateInstanceFunc func);
-    NumericPtr Get(const std::string& lang, const BASE base);
+    Numeric::Ptr Get(const std::string& lang, const BASE base);
 
   private:
     std::map<std::string, CreateInstanceFunc> MapLangFuncs;

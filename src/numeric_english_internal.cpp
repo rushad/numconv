@@ -123,8 +123,8 @@ namespace Converter
     }
   }
 
-  NumericPtr CreateNumericEnglish(const BASE base)
+  Numeric::Ptr CreateNumericEnglish(const BASE base)
   {
-    return NumericPtr(new Internal::NumericEnglish(base));
+    return Numeric::Ptr(new Internal::NumericEnglish(base));
   }
 }

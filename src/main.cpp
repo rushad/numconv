@@ -93,7 +93,7 @@ GTEST_API_ int main(int argc, char** argv)
   factory.Add(LANG_EN, Converter::CreateNumericEnglish);
   factory.Add(LANG_RU, Converter::CreateNumericRussian);
 
-  Converter::NumericPtr convPtr(factory.Get(lang, base));
+  Converter::Numeric::Ptr convPtr(factory.Get(lang, base));
 
   unsigned number;
   std::string numbuf;

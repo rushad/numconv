@@ -140,9 +140,9 @@ namespace Converter
     }
   }
 
-  NumericPtr CreateNumericRussian(const BASE base)
+  Numeric::Ptr CreateNumericRussian(const BASE base)
   {
-    return NumericPtr(new Internal::NumericRussian(base));
+    return Numeric::Ptr(new Internal::NumericRussian(base));
   }
 
 }

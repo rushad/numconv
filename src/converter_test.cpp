@@ -18,9 +18,9 @@ namespace Converter
     class TestNumericFactory : public ::testing::Test
     {
     public:
-      static NumericPtr createInstance(const BASE base)
+      static Numeric::Ptr createInstance(const BASE base)
       {
-        return NumericPtr(new NumericFake());
+        return Numeric::Ptr(new NumericFake());
       }
     };
 
@@ -45,7 +45,7 @@ namespace Converter
     {
       NumericFactory factory;
       factory.Add("TEST", createInstance);
-      NumericPtr numeric = factory.Get("TEST", BASE_DECIMAL);
+      Numeric::Ptr numeric = factory.Get("TEST", BASE_DECIMAL);
       EXPECT_NE(static_cast<Numeric*>(0), numeric.get());
     }
 
