@@ -188,10 +188,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\converter_test.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
@@ -200,15 +196,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_english_test.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\numeric_russian_internal.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\numeric_russian_test.cpp"
+				RelativePath=".\src\test_converter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\test_numeric_english.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\test_numeric_russian.cpp"
 				>
 			</File>
 			<File
